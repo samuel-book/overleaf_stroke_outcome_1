@@ -1,0 +1,63 @@
+\documentclass[titlepage]{article}
+
+% Packages
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{longtable,booktabs} % For tables
+\usepackage{caption} % Customisable captions
+\usepackage{graphicx} % Required for including pictures
+\usepackage{authblk} % For formatting authors
+\usepackage{amsmath} % For maths typesetting
+\usepackage{lineno} % Add line numbers with \linenumbers
+\usepackage[toc,page]{appendix} % For formatting/numbering appendix
+\usepackage[utf8]{inputenc} % For UTF8 character encoding
+\usepackage{url}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage[super]{natbib} % References
+\usepackage{makecell} % For line breaks in a table
+
+\let\endtitlepage\relax % Avoid page break after title page
+
+% New commands for maths symbols:
+
+\newcommand{\mRS}{\rm{mRS}} % mRS for math mode
+\newcommand{\tne}{\ensuremath{t_\mathrm{ne}}} % Time-of-no-effect
+
+\newcommand{\logodds}{log(odds)} % log odds for normal text
+\newcommand{\logoddsratio}{log(odds ratio)} % log odds for normal text
+
+% Extra commands for draft only: 
+\usepackage{ulem} % for strikeout \sout
+% Make commands for fancy notes
+% https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX#Named_colours_provided_by_the_xcolor_package
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\newcommand{\Anna}[1]{\textcolor{Green}{#1}}
+% pick a different colour if you prefer:
+\newcommand{\Kerry}[1]{\textcolor{Purple}{#1}}
+\newcommand{\Mike}[1]{\textcolor{Teal}{#1}}
+\newcommand{\checkthis}[1]{\textcolor{Orange}{#1}}
+
+
+\begin{document}
+
+
+% Add line numbers if needed
+% \linenumbers
+
+% Title page
+\input{chapters/1_title}
+\maketitle
+
+% Sections
+\input{chapters/2_abstract}
+\input{chapters/3_introduction} % Use 'input' rather than 'include' to avoid page breaks
+\input{chapters/4_methods}
+
+
+% Add reference section
+\section{References}
+\bibliographystyle{naturemag}
+\bibliography{refs}
+
+
+\end{document}
