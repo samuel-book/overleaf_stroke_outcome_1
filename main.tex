@@ -16,11 +16,12 @@
 \usepackage[super]{natbib} % References
 \usepackage{makecell} % For line breaks in a table
 \usepackage{subcaption} % Allows use of subfigures
+\usepackage{lmodern} % A scalable font - avoids erros due to non-sclabale fonts
 \DeclareUnicodeCharacter{2060}{\nolinebreak} % Prevent unicode (U+2060) error on local complile
 
 \let\endtitlepage\relax % Avoid page break after title page
-% New commands for maths symbols:
 
+% New commands for maths symbols:
 \newcommand{\mRS}{\rm{mRS}} % mRS for math mode
 \newcommand{\tne}{\ensuremath{t_\mathrm{ne}}} % Time-of-no-effect
 
@@ -53,7 +54,6 @@
 \input{chapters/2_abstract}
 \input{chapters/3_introduction} % Use 'input' rather than 'include' to avoid page breaks
 \input{chapters/4_methods}
-
 
 % Add reference section
 \section{References}
