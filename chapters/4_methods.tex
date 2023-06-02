@@ -4,8 +4,11 @@
 
 Modified Rankin Scale (mRS) is the most commonly used instrument to describe post-stroke functional outcome \cite{quinn_functional_2009}. Table \ref{tab:mrs} shows a description of the seven levels of mRS along with utilties, from Wang \emph{et al.}\cite{wang_utility-weighted_2020}. Utilities are a measure of the preference or value that an individual or society gives a particular health state, with 1 being full health and 0 being dead (values of less than zero describe states where death is considered preferable).
 
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{2.0} % adjust row spacing
+
+
+
+\renewcommand*{\arraystretch}{1.5} % adjust row spacing
+
 \begin{longtable}[]{@{}llr@{}}
 \caption{A description of modified Rankin Scale score, with Utilities from Wang \emph{et al.}\cite{wang_utility-weighted_2020}}\\
 \toprule
@@ -26,7 +29,6 @@ bedridden, incontinent. & -0.19\tabularnewline
 \bottomrule
 \label{tab:mrs}
 \end{longtable}
-\end{minipage}
 
 \subsection{Methods overview}
 
@@ -46,4 +48,21 @@ The \emph{t = 0} mRS distributions are calculated to give the expected mRS distr
 
 The \emph{t = No Effect} mRS distributions are based on mRS distribution data when patients did not receive any treatment (this represents what will happen if the patient takes the treatment at \emph{t = No Effect}). This data is obtained from the untreated control group in clinical trials and further adjusted to include the risk of excess deaths caused by taking the treatment. Further details specific to stroke type and treatment type are given below.
 
-To predict the effect of treatment at any given time, we assume that the log odds of being in any particular mRS category will vary linearly over time between \emph{t = 0} and \emph{t = No Effect} mRS distributions. This form of decay was fitted to clinical trial data for IVT \cite{emberson_effect_2014} and MT \cite{fransen_time_2016}. 
+To predict the effect of treatment at any given time, we assume that the log odds of being in any particular mRS category will vary linearly over time between \emph{t = 0} and \emph{t = No Effect} mRS distributions. This form of decay was fitted to clinical trial data for IVT \cite{emberson_effect_2014} and MT \cite{fransen_time_2016}.
+
+\subsection{Pre-stroke mRS distribution (full recovery from current stroke)}
+
+The pre-stroke mRS distribution (equivalent to full recovery from the current stroke) is taken from the SSNAP dataset, which contains a record of mRS prior to the current stroke, extracting the patients that have an ischaemic stroke and using NIHSS 0-10 as a surrogate for nLVO, or NIHSS 11+ as a surrogate for LVO. These mRS distributions are then corrected for the excess deaths due to treatment (see below).
+
+\subsection{mRS distribution for tiem when treatment has no effect}
+
+For nLVO patients the \emph{no effect mRS distribution} is taken from the untreated control group of combined nLVO/LVO data from Lees et al. 2010 \cite{lees_time_2010}, and from that we remove the contribution of the LVO patients by using the results from the untreated control group of LVO-only data from Goyal et al. 2016 . Each mRS distribution (Lees, and Goyal) are adjusted to account for the excess deaths due to IVT treatment (using their relevant patient type: nLVO and/or LVO, see *weights* subsection below for more information). The two mRS distributions are then combined, using weightings (154\% Lees and -54\% Goyal) chosen such that the resulting mRS distribution represents just the nLVO patients and matches the P(mRS <= 1, *t = No Effect"*) of 0.46 (from the control group in Emberson with NIHSS of 0-10).
+
+* For *LVO patients* the *no effect mRS distribution* is taken from the untreated control population from Goyal et al. 2016.  This mRS distribution is then corrected for the excess deaths due to treatment (see *weights* subsection below for more information).
+
+
+
+\subsection{nLVO treated with IVT}
+
+\subsubsection{mRS distribution at \emph{t = 0} (for nLVO-IVT)}
+

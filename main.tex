@@ -17,6 +17,8 @@
 \usepackage{makecell} % For line breaks in a table
 \usepackage{subcaption} % Allows use of subfigures
 \usepackage{lmodern} % A scalable font - avoids erros due to non-sclabale fonts
+\usepackage{lipsum} % For generating test text
+\usepackage{multicol}
 \DeclareUnicodeCharacter{2060}{\nolinebreak} % Prevent unicode (U+2060) error on local complile
 
 \let\endtitlepage\relax % Avoid page break after title page
@@ -31,6 +33,10 @@
 % Extra commands for draft only: 
 %\usepackage{ulem} % for strikeout \sout
 % Make commands for fancy notes
+
+% Have different references in Appendix
+\usepackage{multibib}
+\newcites{appendix}{References for Appendix}
 % https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX#Named_colours_provided_by_the_xcolor_package
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 \newcommand{\Anna}[1]{\textcolor{Green}{#1}}
@@ -40,8 +46,20 @@
 \newcommand{\checkthis}[1]{\textcolor{Orange}{#1}}
 
 
+
+
+
+
 \begin{document}
 
+% Info on wordcounts:
+% https://www.overleaf.com/learn/how-to/Is_there_a_way_to_run_a_word_count_that_doesn%27t_include_LaTeX_commands%3F
+
+% To include refs in word count:
+%TC:incbib
+
+% Ignore title and abstract in word count
+%TC:ignore
 
 % Add line numbers if needed
 % \linenumbers
@@ -52,8 +70,13 @@
 
 % Sections
 \input{chapters/2_abstract}
+
+%TC:endignore
+
+
 \input{chapters/3_introduction} % Use 'input' rather than 'include' to avoid page breaks
 \input{chapters/4_methods}
+\input{chapters/5_results}
 
 % Add reference section
 \section{References}
