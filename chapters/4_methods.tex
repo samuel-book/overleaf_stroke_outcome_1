@@ -30,39 +30,21 @@ bedridden, incontinent. & -0.19\tabularnewline
 \label{tab:mrs}
 \end{longtable}
 
-\subsection{Methods overview}
+\subsection{Outcome estimation}
 
-This model contains mRS outcome distributions for three patient-treatment cohorts
+This model contains mRS outcome distributions for three patient-treatment cohorts: 1) nLVO treated with IVT, 2) LVO treated with IVT, 3) LVO treeted with MT.
 
-\begin{enumerate}
-    \item nLVO treated with IVT
-    \item LVO treated with IVT
-    \item LVO treted with MT
-\end{enumerate}
+For each patient-treatment cohort, we estimate two mRS distributions: one mRS distribution if treatment is given at \emph{t = 0} (time of stroke onset), and one mRS distribution if treatment is given at \emph{t = No Effect} (time of no effect). In order to estimate these two mRS distributions, we use data from reperfusion treatment clinical trials \cite{lees_time_2010, emberson_effect_2014, goyal_endovascular_2016} and stroke admission data from England and Wales (Sentinel Stroke National Audit Programme). To select the relevant patients for each cohort we will use the National Institutes of Health Stroke Scale (NIHSS) on arrival as a surrogate to classify patients as nLVO (NIHSS 0-10) or LVO (NIHSS 11+). NIHSS has been shown to have higher accuracy, in separating nLVO and LVO, than other stroke scales (Area under Receiver Operating Characteristic Curve = 0.86 \cite{duvekot_comparison_2021}).
 
-For each patient-treatment cohort, we estimate two mRS distributions: one mRS distribution if treatment is given at \emph{t = 0} (time of stroke onset), and one mRS distribution if treatment is given at \emph{t = No Effect} (time of no effect). In order to estimate these two mRS distributions, we use data from reperfusion treatment clinical trials and stroke admission data from England and Wales. To select the relevant patients for each cohort we will use the National Institutes of Health Stroke Scale (NIHSS) on arrival as a surrogate to classify patients as nLVO (NIHSS 0-10) or LVO (NIHSS 11+). NIHSS has been shown to have higher accuracy, in separating nLVO and LVO, than other stroke scales (Area under Receiver Operating Characteristic Curve = 0.86 \cite{duvekot_comparison_2021}).
+All mRS distributions created are based on the assumption that, following treatment, the mRS distribution will lie between two extremes: 1) reperfusion perfectly restores function, and the resulting mRS distribution is the same as the pre-stroke mRS distribution, and 2) reperfusion treatment fails to restore any function and the resulting mRS distribution is the same as a control untreated population. Both distributions are corrected for excess deaths that may be caused by the treatment (from clinical trials \cite{emberson_effect_2014, goyal_endovascular_2016}). To create the required mRS distributions we find a weighting between these two extremes that gives us distributions that match published reference points.
 
-All mRS distributions created are based on the assumption that, following treatment, the mRS distribution will lie between two extremes: 1) reperfusion perfectly restores function, and the resulting mRS distribution is the same as the pre-stroke mRS distribution (this data is obtained from Sentinel Stroke National Audit Programme, SSNAP, using 246,676 emergency stroke admissions to acute stroke teams in England and Wales between 2016 and 2018), and 2) reperfusion treatment fails to restore any function and the resulting mRS distribution is the same as a control untreated population. Both distributions are corrected for excess deaths that may be caused by the treatment (from clinical trials). To create required mRS distributions we find a weighting between these two extremes that give us a distribution that matches published reference points.
+The \textit{t = 0} mRS distributions are calculated to give the expected mRS distributions if treatment was given immediately after stroke onset, and also include the risk of excess deaths caused by taking the treatment. 
 
-The \emph{t = 0} mRS distributions are calculated to give the expected mRS distributions if treatment was given immediately after stroke onset, and also include the risk of excess deaths caused by taking the treatment. Further details specific to stroke type and treatment type are given below.
+The \textit{t = No Effect} mRS distributions are based on mRS distribution data when patients did not receive any treatment (this represents what will happen if the patient takes the treatment at \textit{t = No Effect}). This data is obtained from the untreated control group in clinical trials and further adjusted to include the risk of excess deaths caused by taking the treatment.
 
-The \emph{t = No Effect} mRS distributions are based on mRS distribution data when patients did not receive any treatment (this represents what will happen if the patient takes the treatment at \emph{t = No Effect}). This data is obtained from the untreated control group in clinical trials and further adjusted to include the risk of excess deaths caused by taking the treatment. Further details specific to stroke type and treatment type are given below.
+To predict the effect of treatment at any given time, we assume that the log odds of being in any particular mRS category will vary linearly over time between \textit{t = 0} and \textit{t = No Effect} mRS distributions. This form of decay was fitted to clinical trial data for IVT \cite{emberson_effect_2014} and MT \cite{fransen_time_2016}.
 
-To predict the effect of treatment at any given time, we assume that the log odds of being in any particular mRS category will vary linearly over time between \emph{t = 0} and \emph{t = No Effect} mRS distributions. This form of decay was fitted to clinical trial data for IVT \cite{emberson_effect_2014} and MT \cite{fransen_time_2016}.
-
-\subsection{Pre-stroke mRS distribution (full recovery from current stroke)}
-
-The pre-stroke mRS distribution (equivalent to full recovery from the current stroke) is taken from the SSNAP dataset, which contains a record of mRS prior to the current stroke, extracting the patients that have an ischaemic stroke and using NIHSS 0-10 as a surrogate for nLVO, or NIHSS 11+ as a surrogate for LVO. These mRS distributions are then corrected for the excess deaths due to treatment (see below).
-
-\subsection{mRS distribution for tiem when treatment has no effect}
-
-For nLVO patients the \emph{no effect mRS distribution} is taken from the untreated control group of combined nLVO/LVO data from Lees et al. 2010 \cite{lees_time_2010}, and from that we remove the contribution of the LVO patients by using the results from the untreated control group of LVO-only data from Goyal et al. 2016 . Each mRS distribution (Lees, and Goyal) are adjusted to account for the excess deaths due to IVT treatment (using their relevant patient type: nLVO and/or LVO, see \emph{weights} subsection below for more information). The two mRS distributions are then combined, using weightings (154\% Lees and -54\% Goyal) chosen such that the resulting mRS distribution represents just the nLVO patients and matches the P(mRS $\leq$ 1, t = No Effect) of 0.46 (from the control group in Emberson with NIHSS of 0-10).
-
-* For LVO patients the \emph{no effect} mRS distribution is taken from the untreated control population from Goyal et al. 2016.  This mRS distribution is then corrected for the excess deaths due to treatment.
+Further details are given in the supplementary material.
 
 
-
-\subsection{nLVO treated with IVT}
-
-\subsubsection{mRS distribution at \emph{t = 0} (for nLVO-IVT)}
 
