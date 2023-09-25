@@ -1,7 +1,7 @@
 \documentclass{article}
 
 % Packages
-\usepackage[a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage[a4paper, left=2.0cm, right=2.0cm, top=2.0cm, bottom=2.0cm]{geometry}
 \usepackage{longtable,booktabs} % For tables
 \usepackage{caption} % Customisable captions
 \usepackage{graphicx} % Required for including pictures
@@ -19,8 +19,9 @@
 \usepackage{lmodern} % A scalable font - avoids erros due to non-sclabale fonts
 \usepackage{lipsum} % For generating test text
 \usepackage{multicol}
+\usepackage{tabularx} % To allow tables to be full page width
 \DeclareUnicodeCharacter{2060}{\nolinebreak} % Prevent unicode (U+2060) error on local complile
-
+\usepackage{afterpage} % For palcing tabel at top of next page
 \let\endtitlepage\relax % Avoid page break after title page
 
 % New commands for maths symbols:
@@ -79,9 +80,13 @@
 \input{chapters/5_results}
 
 % Add reference section
+\begin{multicols}{2}
 \section{References}
 \bibliographystyle{naturemag}
 \bibliography{refs}
+\end{multicols}
 
-
+%TC:ignore
+\include{chapters/9_appendix}
+%TC:endignore
 \end{document}
