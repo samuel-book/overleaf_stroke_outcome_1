@@ -39,31 +39,22 @@ bedridden, incontinent. & -0.19\tabularnewline
 
 This model contains mRS outcome distributions for three patient-treatment cohorts: 1) nLVO treated with IVT, 2) LVO treated with IVT, 3) LVO treated with MT.
 
-For each patient-treatment cohort, we estimate two mRS distributions: one mRS distribution if treatment is given at \emph{t=0} (time of stroke onset), and one mRS distribution if treatment is given at \emph{t=No Effect} (time of no effect of treatment). In order to estimate these two mRS distributions, we use data from reperfusion treatment clinical trials \cite{lees_time_2010, emberson_effect_2014, goyal_endovascular_2016, fransen_time_2016} and stroke admission data from England and Wales (Sentinel Stroke National Audit Programme). To select the relevant patients for each cohort we use the National Institutes of Health Stroke Scale (NIHSS) on arrival as a surrogate to classify patients as nLVO (NIHSS 0-10) or LVO (NIHSS 11+). NIHSS has been shown to have higher accuracy, in separating nLVO and LVO, than other stroke scales (Area under Receiver Operating Characteristic Curve = 0.86 \cite{duvekot_comparison_2021}).
-
-
-All mRS distributions created are based on the assumption that, following treatment, the mRS distribution will lie between two extremes: 1) reperfusion perfectly restores function, and the resulting mRS distribution is the same as the pre-stroke mRS distribution, and 2) reperfusion treatment fails to restore any function and the resulting mRS distribution is the same as a control untreated population. Both distributions are corrected for excess deaths that may be caused by the treatment (from clinical trials). 
-
-The \textit{t=0} mRS distributions are calculated to give the expected mRS distributions if treatment was given immediately after stroke onset, and also include the risk of excess deaths caused by taking the treatment. 
-
-The \textit{t = No Effect} mRS distributions are based on mRS distribution data when patients did not receive any treatment (this represents what will happen if the patient takes the treatment at \textit{t = No Effect}). This data is obtained from the untreated control groups in clinical trials and further adjusted to include the risk of excess deaths caused by taking the treatment.
-
-To predict the effect of treatment at any given time, we assume that the log odds of being in any particular mRS category will vary linearly over time between \textit{t=0} and \textit{t=No Effect} mRS distributions. This form of decay was fitted to clinical trial data for IVT \cite{emberson_effect_2014} and MT \cite{fransen_time_2016}. The time to no effect was 6.3 hours for IVT and 8.0 hours for MT. Our model does not include selection of patients who may still benefit from treatment past these times.
+For each patient-treatment cohort, we estimate two mRS distributions: one mRS distribution if treatment is given at \emph{t=0} (time of stroke onset), and one mRS distribution if treatment is given at \emph{t=No Effect} (time of no effect of treatment). In order to estimate these two mRS distributions, we use data from reperfusion treatment clinical trials \cite{lees_time_2010, emberson_effect_2014, goyal_endovascular_2016, fransen_time_2016} and stroke admission data from England and Wales (Sentinel Stroke National Audit Programme). To select the relevant patients for each cohort we use the National Institutes of Health Stroke Scale (NIHSS) on arrival as a surrogate to classify patients as nLVO (NIHSS 0-10) or LVO (NIHSS 11+). NIHSS has been shown to have higher accuracy, in separating nLVO and LVO, than other stroke scales (Area under Receiver Operating Characteristic Curve = 0.86 \cite{duvekot_comparison_2021}). Both of these distributions include the risk of excess deaths caused by taking the treatment. To predict the effect of treatment at any given time, we assume that the log odds of being in any particular mRS category will vary linearly over time between \textit{t=0} and \textit{t=No Effect} mRS distributions. This form of decay was fitted to clinical trial data for IVT \cite{emberson_effect_2014} and MT \cite{fransen_time_2016}. The time to no effect was 6.3 hours for IVT and 8.0 hours for MT. Our model does not include selection of patients who may still benefit from treatment past these times. Table \ref{tab:mrs_dists} shows the derived distributions (further details are in supplementary material).
 
 \begin{minipage}{\textwidth}
 \begin{longtable}[]{@{}llllllll@{}}
-\caption{Assumed mRS distributions for nLVO and LVO with and without treatment. Treatment effects are given as expected effect if treatment were given at time of stroke onset, and the effect if treatment is given at the time that no benefit is expected (*but risk of treatment-related deaths still exist).}\\
+\caption{Derived mRS distributions for nLVO and LVO with and without treatment. Treatment effects are given as expected effect if treatment were given at time of stroke onset, and the effect if treatment is given at the time that no benefit is expected (*but risk of treatment-related deaths still exist).}\\
 \toprule
 \endhead
 Stroke type & mRS=0 & mRS\textless=1 & mRS\textless=2 & mRS\textless=3 & mRS\textless=4 & mRS\textless=5 & mRS\textless=6\tabularnewline
 \midrule
 nLVO: No treatment & 0.1971 & 0.4600 & 0.5800 & 0.7078 & 0.8557 & 0.9177 & 1.0000\tabularnewline
-nLVO: IVT no effect & 0.1973 & 0.4600 & 0.5776 & 0.7023 & 0.8452 & 0.9045 & 1.0000\tabularnewline
+nLVO: IVT no effect* & 0.1973 & 0.4600 & 0.5776 & 0.7023 & 0.8452 & 0.9045 & 1.0000\tabularnewline
 nLVO: IVT t=0 treatment & 0.4298 & 0.6300 & 0.7382 & 0.8484 & 0.9292 & 0.9563 & 1.0000\tabularnewline
 LVO: No treatment & 0.0500 & 0.1290 & 0.2650 & 0.4290 & 0.6760 & 0.8110 & 1.0000\tabularnewline
-LVO: IVT no effect & 0.0479 & 0.1236 & 0.2539 & 0.4110 & 0.6476 & 0.7769 & 1.0000\tabularnewline
+LVO: IVT no effect* & 0.0479 & 0.1236 & 0.2539 & 0.4110 & 0.6476 & 0.7769 & 1.0000\tabularnewline
 LVO: IVT t=0 treatment & 0.1129 & 0.2000 & 0.3274 & 0.4848 & 0.6982 & 0.8114 & 1.0000\tabularnewline
-LVO: MT no effect & 0.0478 & 0.1233 & 0.2532 & 0.4100 & 0.6460 & 0.7750 & 1.0000\tabularnewline
+LVO: MT no effect* & 0.0478 & 0.1233 & 0.2532 & 0.4100 & 0.6460 & 0.7750 & 1.0000\tabularnewline
 LVO: MT t=0 treatment & 0.3141 & 0.4363 & 0.5544 & 0.7123 & 0.8536 & 0.9168 & 1.0000\tabularnewline
 \bottomrule
 \label{tab:mrs_dists}
